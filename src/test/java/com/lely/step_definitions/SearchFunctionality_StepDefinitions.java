@@ -9,6 +9,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFunctionality_StepDefinitions {
     SearchResultsPage searchResultsPage= new SearchResultsPage();
@@ -35,8 +39,41 @@ public class SearchFunctionality_StepDefinitions {
         homePage.searchButton.click();
     }
     @Then("all search results should contain the keyword {string}")
-    public void all_search_results_should_contain_the_keyword(String string) {
-//        System.out.println("searchResultsPage.searchResults.size() = " + searchResultsPage.searchResults.size());
+    public void all_search_results_should_contain_the_keyword(String keyword) {
+
+        System.out.println("searchResultsPage.searchResults.size() = " + searchResultsPage.searchResults.size());
+        List<String> results = new ArrayList<>();
+        for (WebElement searchResult : searchResultsPage.searchResults) {
+            String description=searchResult.getText().toLowerCase();
+            try {
+                Assert.assertTrue("Search result description should contain the keyword: " + keyword,
+                        description.contains(keyword));
+                results.add("\nPASS: " + description);
+            } catch (AssertionError e) {
+                results.add("\nFAIL: " + description);
+            }
+
+        }
+        System.out.println("results = " + results);
+        boolean isNextpageButtonEnabled=!searchResultsPage.nextButton.getAttribute("class").contains("disabled");
+        while (isNextpageButtonEnabled){
+            searchResultsPage.nextButton.click();
+            System.out.println("searchResultsPage.searchResults.size() = " + searchResultsPage.searchResults.size());
+            for (WebElement searchResult : searchResultsPage.searchResults) {
+                String description=searchResult.getText().toLowerCase();
+                try {
+                    Assert.assertTrue("Search result description does not contain the keyword: " + keyword,
+                            description.contains(keyword));
+                    results.add("\nPASS: " + description);
+                } catch (AssertionError e) {
+                    results.add("\nFAIL: " + description);
+                }
+
+            }
+            System.out.println("searchResultsPage.nextButton.getAttribute(\"class\").contains(\"disabled\") = "
+                    + searchResultsPage.nextButton.getAttribute("class").contains("disabled"));
+            isNextpageButtonEnabled=!searchResultsPage.nextButton.getAttribute("class").contains("disabled");
+        }
     }
 
 }
