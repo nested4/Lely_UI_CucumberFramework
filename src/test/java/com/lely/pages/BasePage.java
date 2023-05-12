@@ -24,7 +24,12 @@ public abstract class BasePage {
     public WebElement acceptCookiesButton;
 
     public void navigateToHomePage() {
-        String url = ConfigurationReader.get("url");
+        String url = ConfigurationReader.get("url_homepage");
+        Driver.getDriver().get(url);
+    }
+
+    public void navigateToTechDocsPage() {
+        String url = ConfigurationReader.get("url_techdocs");
         Driver.getDriver().get(url);
     }
 

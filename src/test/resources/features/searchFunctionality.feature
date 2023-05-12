@@ -8,8 +8,8 @@ Feature: Search Functionality
 
   @wip
   Scenario: Verify search functionality
-    Given User is on the Lely website
-    When User clicks the search button
+    Given user is on the Lely website
+    When user clicks the search button
     Then the search area should appear
-    When User enters "happy" into the search area and click the search button
+    When user enters "happy" into the search area and click the search button
     Then all search results should contain the keyword "happy"
