@@ -11,10 +11,11 @@ public abstract class BasePage {
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
     @FindBy(xpath = "//div[@class=\"header-navigation-button__label\" and .=\"Search\"]")
     public WebElement searchButtonHeader;
 
-    @FindBy(id= "global-search")
+    @FindBy(id = "global-search")
     public WebElement searchArea;
 
     @FindBy(xpath = "//button[@type=\"submit\" and .=\"Search\"]")
@@ -33,8 +34,8 @@ public abstract class BasePage {
         Driver.getDriver().get(url);
     }
 
-    public void acceptCookies(){
-        if(acceptCookiesButton.isDisplayed()){
+    public void acceptCookies() {
+        if (acceptCookiesButton.isDisplayed()) {
             acceptCookiesButton.click();
         }
     }
@@ -43,9 +44,6 @@ public abstract class BasePage {
         String mainTab = Driver.getDriver().getWindowHandles().iterator().next();
         Driver.getDriver().switchTo().window(mainTab);
     }
-
-
-
 
 
 }

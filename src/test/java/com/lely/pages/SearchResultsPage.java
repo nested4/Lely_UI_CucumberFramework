@@ -16,10 +16,10 @@ public class SearchResultsPage extends BasePage {
 
     /**
      * doSearchResultsContainKeyword method verifies that each  description
-     * of the search results contains the searched keyword.
+     * of the search results contains the searched keyword
      * Since Lely website search is also bringing some results that does NOT contain the
-     * keyword, method is returning a List of Strings showing passed and failed results
-     * with the search descriptions
+     * keyword in the describtion, this method is also returning a List of Strings showing
+     * results as Passed and Failed with the search descriptions
      *
      * @param keyword
      * @return
@@ -53,7 +53,6 @@ public class SearchResultsPage extends BasePage {
         } while (isNextPageButtonEnabled);
         return results;
     }
-
 
 
 }

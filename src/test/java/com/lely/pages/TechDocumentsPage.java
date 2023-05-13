@@ -4,6 +4,7 @@ import com.lely.utilities.BrowserUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 public class TechDocumentsPage extends BasePage {
 
 
-    @FindBy(css =".select2-selection__arrow" )
+    @FindBy(css = ".select2-selection__arrow")
     public WebElement dropdownArrow;
 
     @FindBy(css = ".select2-search__field")
@@ -21,53 +22,57 @@ public class TechDocumentsPage extends BasePage {
     public List<WebElement> resultItemTitles;
 
     @FindBy(xpath = "((//footer[@class=\"result-item-footer\"])[1]//a)[2]")
-    public  WebElement viewThisDocumentButton;
+    public WebElement viewThisDocumentButton;
 
     @FindBy(xpath = "((//footer[@class=\"result-item-footer\"])[1]//a)[1]")
-    public  WebElement downloadDocumentButton;
+    public WebElement downloadDocumentButton;
 
     /**
      * This method enables you select from dropdown menu
+     *
      * @param documentName
      */
     public void selectDocFromDropdown(String documentName) {
         dropdownArrow.click();
         BrowserUtils.waitFor(1);
-        searchInputBox.sendKeys(documentName+Keys.ENTER);
+        searchInputBox.sendKeys(documentName + Keys.ENTER);
     }
 
     /**
      * This method verifies if the search results visible or not
+     *
      * @return
      */
     public boolean areCatalogsVisible() {
         BrowserUtils.scrollToElement(resultItemTitles.get(0));
-        BrowserUtils.waitForVisibility(resultItemTitles.get(0),4);
+        BrowserUtils.waitForVisibility(resultItemTitles.get(0), 4);
         return resultItemTitles.size() > 0;
     }
 
     /**
      * This method returns the name of the file intended to download
+     *
      * @param downloadButtonOfTheDocIntendedToDownload
      * @return
      */
-    public String getTheNameOfTheDocIntendedToDownload(WebElement downloadButtonOfTheDocIntendedToDownload){
-        String href= downloadButtonOfTheDocIntendedToDownload.getAttribute("href");
-        String fileName = href.substring(href.indexOf("name=") + 5,href.indexOf(".pdf")+4);
+    public String getTheNameOfTheDocIntendedToDownload(WebElement downloadButtonOfTheDocIntendedToDownload) {
+        String href = downloadButtonOfTheDocIntendedToDownload.getAttribute("href");
+        String fileName = href.substring(href.indexOf("name=") + 5, href.indexOf(".pdf") + 4);
         return fileName;
     }
 
 
     /**
      * This method get the all file names from the users downloads folder
+     *
      * @return
      */
-    public List<String> getFileNamesInDownloadDirectory(){
+    public List<String> getFileNamesInDownloadDirectory() {
         // Get the user's home directory
         String userHome = System.getProperty("user.home");
 
         // Specify the path to the Downloads folder
-        String folderPath = userHome +"\\" + "Downloads";
+        String folderPath = userHome + "\\" + "Downloads";
 
         // Create a list for all the file names in the folder
         List<String> fileNames = new ArrayList<>();
@@ -95,6 +100,7 @@ public class TechDocumentsPage extends BasePage {
     /**
      * This method checks if the file with the fileName downloaded in the users download folder
      * Takes the fileName and the file names in the download folder as parameters
+     *
      * @param fileName
      * @param filesBeforeDownload
      * @return
@@ -107,14 +113,12 @@ public class TechDocumentsPage extends BasePage {
         // Compare the file lists
         if (filesAfterDownload.size() > filesBeforeDownload.size()) {
             // New file(s) have been added to the download directory
-            if(filesAfterDownload.contains(fileName)){
+            if (filesAfterDownload.contains(fileName)) {
                 return true;// File is downloaded
             }
         }
         return false;  // File is not downloaded
     }
-
-
 
 
 }
