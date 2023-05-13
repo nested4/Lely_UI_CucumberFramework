@@ -1,11 +1,14 @@
 package com.lely.step_definitions;
 
 import com.lely.pages.TechDocumentsPage;
+import com.lely.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Set;
 
 public class TechDocs_StepDefinitions {
     TechDocumentsPage techDocumentsPage = new TechDocumentsPage();
@@ -29,18 +32,19 @@ public class TechDocs_StepDefinitions {
 
     @When("user views the document")
     public void user_views_the_document() {
-//        techDocumentsPage.viewThisDocumentButton.click();
+        techDocumentsPage.viewThisDocumentButton.click();
 
     }
 
     @Then("the document should be opened in a new tab")
     public void the_document_should_be_opened_in_a_new_tab() {
-
+        Set<String> windowHandles = Driver.getDriver().getWindowHandles();
+        Assert.assertEquals("Number of open tabs is not 2", 2, windowHandles.size());
     }
 
     @When("user return to the previous tab")
     public void user_return_to_the_previous_tab() {
-
+        techDocumentsPage.switchToMainTab();
     }
 
     @When("user download the document")

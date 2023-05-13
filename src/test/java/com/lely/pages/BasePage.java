@@ -39,6 +39,11 @@ public abstract class BasePage {
         }
     }
 
+    public void switchToMainTab() {
+        String mainTab = Driver.getDriver().getWindowHandles().iterator().next();
+        Driver.getDriver().switchTo().window(mainTab);
+    }
+
 
 
 }
