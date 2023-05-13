@@ -49,7 +49,7 @@ public class TechDocs_StepDefinitions {
 
     @When("user download the document")
     public void user_download_the_document() {
-
+        techDocumentsPage.downloadDocumentButton.click();
     }
 
     @Then("the document should be downloaded")
