@@ -42,6 +42,7 @@ public class SearchFunctionality_StepDefinitions {
 
     @Then("all search results should contain the keyword {string}")
     public void all_search_results_should_contain_the_keyword(String keyword) {
+        //Check if search results contain the keyword
         System.out.println(searchResultsPage.doSearchResultsContainKeyword(keyword));
     }
 

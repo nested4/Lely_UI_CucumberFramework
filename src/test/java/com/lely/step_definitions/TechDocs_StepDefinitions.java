@@ -1,6 +1,8 @@
 package com.lely.step_definitions;
 
 import com.lely.pages.TechDocumentsPage;
+import com.lely.utilities.BrowserUtils;
+import com.lely.utilities.ConfigurationReader;
 import com.lely.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,11 +10,14 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 public class TechDocs_StepDefinitions {
     TechDocumentsPage techDocumentsPage = new TechDocumentsPage();
-
+    String filename="";
+    List<String> filesBeforeDownload;
     @Given("user navigates to {string}")
     public void user_navigates_to(String string) {
         techDocumentsPage.navigateToTechDocsPage();
@@ -49,11 +54,19 @@ public class TechDocs_StepDefinitions {
 
     @When("user download the document")
     public void user_download_the_document() {
+        filename= techDocumentsPage.getTheNameOfTheDocIntendedToDownload(techDocumentsPage.downloadDocumentButton);
+        filesBeforeDownload= techDocumentsPage.getFileNamesInDownloadDirectory();
+        // To check the file name, can be deleted
+        System.out.println("filename = " + filename);
+        // To check the file names in the users download folder,can be deleted
+        System.out.println(filesBeforeDownload);
         techDocumentsPage.downloadDocumentButton.click();
     }
 
     @Then("the document should be downloaded")
     public void the_document_should_be_downloaded() {
-
+        //Wait a litte for the document to be downloaded
+        BrowserUtils.waitFor(5);
+        Assert.assertTrue("File is not downloaded", techDocumentsPage.isFileDownloaded(filename,filesBeforeDownload));
     }
 }
