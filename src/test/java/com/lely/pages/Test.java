@@ -10,9 +10,11 @@ public class Test {
     //Erase Before Submit SIIIILLLLL!!!!!!!!!!!!!!!!!!!!!!!!
     @org.junit.Test
     public void test1() {
-        Driver.getDriver().get("https://google.com");
-        Driver.getDriver().findElement(By.xpath("//textarea[@id='APjFqb' and @class=\"gLFyf\"]")).sendKeys("Elma"+ Keys.ENTER);
-        WebElement gooooogle = Driver.getDriver().findElement(By.cssSelector("tr[jsname='TeSSVd'] "));
-        BrowserUtils.scrollToElement(gooooogle);
+//        Driver.getDriver().get("https://google.com");
+//        Driver.getDriver().findElement(By.xpath("//textarea[@id='APjFqb' and @class=\"gLFyf\"]")).sendKeys("Elma"+ Keys.ENTER);
+//        WebElement gooooogle = Driver.getDriver().findElement(By.cssSelector("tr[jsname='TeSSVd'] "));
+//        BrowserUtils.scrollToElement(gooooogle);
+
+
     }
 }

@@ -12,10 +12,6 @@ import java.util.List;
 
 public class TechDocumentsPage extends BasePage {
 
-    @FindBy(css = "#id_q")
-    public WebElement documentDropdown;
-    @FindBy (tagName = "iframe")
-    public WebElement iframe;
 
     @FindBy(css =".select2-selection__arrow" )
     public WebElement dropdownArrow;
@@ -27,19 +23,18 @@ public class TechDocumentsPage extends BasePage {
     public List<WebElement> resultItemTitles;
 
 
+
+
     public void selectDocFromDropdown(String documentName) {
         dropdownArrow.click();
-        BrowserUtils.waitForVisibility(searchInputBox,4);
+        BrowserUtils.waitFor(1);
         searchInputBox.sendKeys(documentName+Keys.ENTER);
-//        Driver.getDriver().switchTo().frame(iframe);
-//        Select select = new Select(documentDropdown);
-//        select.selectByVisibleText(documentName);
     }
 
     public boolean areCatalogsVisible() {
 
-        BrowserUtils.scrollToElement(resultItemTitles.get(1));
-        BrowserUtils.waitForVisibility(resultItemTitles.get(1),4);
+        BrowserUtils.scrollToElement(resultItemTitles.get(0));
+        BrowserUtils.waitForVisibility(resultItemTitles.get(0),4);
         return resultItemTitles.size() > 0;
 
     }
